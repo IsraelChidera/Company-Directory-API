@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel;
 using System.Reflection;
 using CompanyEmployees.Presentation.ModelBinders;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CompanyEmployees.Presentation.Controllers
 {
@@ -20,6 +21,7 @@ namespace CompanyEmployees.Presentation.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult GetCompanies()
         {
             var companies = _service.CompanyService.GetAllCompanies(trackChanges: false);

@@ -30,6 +30,10 @@ namespace CompanyEmployees
             builder.Services.AddControllers()
                 .AddApplicationPart(typeof(CompanyEmployees.Presentation.AssemblyReference).Assembly);
             builder.Services.AddAutoMapper(typeof(Program));
+            //step 8: Identity set up
+            builder.Services.AddAuthentication();
+            builder.Services.ConfigureIdentity();
+            builder.Services.ConfigureJWT(builder.Configuration);
 
             //step 7: for patching
             NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>
@@ -92,6 +96,7 @@ namespace CompanyEmployees
             });
             app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
